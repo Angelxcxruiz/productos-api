@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: productos-api
+
+  r2dbc:
+    url: ${DATABASE_URL:r2dbc:postgresql://localhost:5432/productosdb}
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:postgres}
+    pool:
+      initial-size: 5
+      max-size: 10
+      max-idle-time: 30m
+
+  sql:
+    init:
+      mode: always
+
+server:
+  port: ${PORT:8080}
+
+logging:
+  level:
+    com.api.productos: DEBUG
+    org.springframework.r2dbc: DEBUG
