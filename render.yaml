@@ -1,16 +1,23 @@
 services:
   - type: web
     name: productos-api
-    runtime: docker
-    dockerfilePath: ./Dockerfile
+    runtime: image
+    image:
+      url: docker.io/angxi/productos-api:latest
     plan: free
     envVars:
-      - key: DATABASE_URL
+      - key: DB_HOST
         fromDatabase:
           name: productos-db
-          property: connectionString
-        # Render provee la URL en formato postgresql://, la convertimos a r2dbc:
-        # Debes ajustar manualmente a: r2dbc:postgresql://...
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: productos-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: productos-db
+          property: database
       - key: DATABASE_USERNAME
         fromDatabase:
           name: productos-db

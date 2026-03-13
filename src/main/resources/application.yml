@@ -3,12 +3,12 @@ spring:
     name: productos-api
 
   r2dbc:
-    url: ${DATABASE_URL:r2dbc:postgresql://localhost:5432/productosdb}
+    url: r2dbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:productosdb}
     username: ${DATABASE_USERNAME:postgres}
     password: ${DATABASE_PASSWORD:postgres}
     pool:
-      initial-size: 5
-      max-size: 10
+      initial-size: 2
+      max-size: 5
       max-idle-time: 30m
 
   sql:
